@@ -1,0 +1,64 @@
+#!Nsis Installer Command Script
+#
+# This is an NSIS Installer Command Script generated automatically
+# by the Fedora nsiswrapper program.  For more information see:
+#
+#   http://fedoraproject.org/wiki/MinGW
+#
+# To build an installer from the script you would normally do:
+#
+#   makensis this_script
+#
+# which will generate the output file 'AddSudoRuleCmdlet.exe' which is a Windows
+# installer containing your program.
+
+Name "AddSudoRuleCmdlet"
+OutFile "AddSudoRuleCmdlet.exe"
+InstallDir "$ProgramFiles64\WindowsPowerShell\Modules"
+InstallDirRegKey HKLM SOFTWARE\AddSudoRuleCmdlet "Install_Dir"
+
+ShowInstDetails hide
+ShowUninstDetails hide
+
+# Uncomment this to enable BZip2 compression, which results in
+# slightly smaller files but uses more memory at install time.
+#SetCompressor bzip2
+
+XPStyle on
+
+#Page components
+#Page directory
+Page instfiles
+
+#ComponentText "Select which optional components you want to install."
+
+#DirText "Please select the installation folder."
+
+Section "AddSudoRuleCmdlet"
+  SectionIn RO
+
+  SetOutPath "$INSTDIR\."
+  File /r "AddSudoRuleCmdlet"
+SectionEnd
+
+#Section "Start Menu Shortcuts"
+#  CreateDirectory "$SMPROGRAMS\AddSudoRuleCmdlet"
+#  CreateShortCut "$SMPROGRAMS\AddSudoRuleCmdlet\Uninstall AddSudoRuleCmdlet.lnk" "$INSTDIR\Uninstall AddSudoRuleCmdlet.exe" "" "$INSTDIR\Uninstall AddSudoRuleCmdlet.exe" 0
+#SectionEnd
+
+#Section "Desktop Icons"
+#SectionEnd
+
+Section "Uninstall"
+#  Delete /rebootok "$SMPROGRAMS\AddSudoRuleCmdlet\Uninstall AddSudoRuleCmdlet.lnk"
+#  RMDir "$SMPROGRAMS\AddSudoRuleCmdlet"
+
+  RMDir /r "$INSTDIR\.\"
+
+  RMDir "$INSTDIR"
+SectionEnd
+
+Section -post
+  WriteUninstaller "$INSTDIR\Uninstall AddSudoRuleCmdlet.exe"
+SectionEnd
+
